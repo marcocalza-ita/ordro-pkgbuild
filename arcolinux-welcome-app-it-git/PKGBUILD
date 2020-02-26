@@ -1,6 +1,6 @@
 # Maintainer: Erik Dubois <erik.dubois@gmail.com>
-pkgname=arcolinux-welcome-app-git
-_pkgname=arcolinux-welcome-app
+pkgname=arcolinux-welcome-app-it-git
+_pkgname=arcolinux-welcome-app-it
 _destname1="/etc/skel/.config/"
 _destname2="/usr/"
 _licensedir="/usr/share/arcolinux/licenses/"
@@ -8,20 +8,20 @@ pkgver=20.3
 pkgrel=6
 pkgdesc="Welcome application for arcolinux"
 arch=('any')
-url="https://github.com/arcolinux/arcolinux-welcome-app"
+url="https://github.com/marcocalza/arcolinux-welcome-app-it"
 license=('GPL3')
 makedepends=('git')
 provides=("${pkgname}")
-conflicts=('arcolinux-welcome-app-dev-git')
+conflicts=('arcolinux-welcome-app-git')
 install='readme.install'
 options=(!strip !emptydirs)
-source=("${url}/archive/${pkgver}-${pkgrel}.tar.gz")
+source=(${_pkgname}::"git+https://github.com/marcocalza/arcolinux-welcome-app-it.git")
 sha256sums=('SKIP')
 package() {
 	install -dm755 ${pkgdir}${_licensedir}${_pkgname}
-	install -m644  ${srcdir}/${_pkgname}-${pkgver}-${pkgrel}/LICENSE ${pkgdir}${_licensedir}${_pkgname}
+	install -m644  ${srcdir}/${_pkgname}/LICENSE ${pkgdir}${_licensedir}${_pkgname}
 	mkdir -p "${pkgdir}${_destname1}"
-	cp -r "${srcdir}/${_pkgname}-${pkgver}-${pkgrel}/${_destname1}/"* "${pkgdir}${_destname1}"
+	cp -r "${srcdir}/${_pkgname}/${_destname1}/"* "${pkgdir}${_destname1}"
 	mkdir -p "${pkgdir}${_destname2}"
-	cp -r "${srcdir}/${_pkgname}-${pkgver}-${pkgrel}/${_destname2}/"* "${pkgdir}${_destname2}"
+	cp -r "${srcdir}/${_pkgname}/${_destname2}/"* "${pkgdir}${_destname2}"
 }
